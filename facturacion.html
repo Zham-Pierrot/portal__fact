@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portal de Facturación</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .container {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .invoice-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .invoice-card:hover {
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .form-header {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .form-header:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+        
+        .form-group label {
+            color: var(--dark-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 12px 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .btn-submit {
+            background-color: var(--secondary-color);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .btn-submit:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .logo {
+            margin-bottom: 30px;
+            max-width: 200px;
+        }
+        
+        .required-field::after {
+            content: '*';
+            color: var(--accent-color);
+            margin-left: 4px;
+        }
+        
+        .info-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin-top: 20px;
+                padding: 0 15px;
+            }
+            
+            .invoice-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="invoice-card">
+                    <div class="text-center">
+                        <!-- Puedes agregar un logo aquí -->
+                        <!-- <img src="logo.png" alt="Logo Empresa" class="logo"> -->
+                        <h2 class="form-header">Portal de Facturación</h2>
+                        <p class="mb-4">Complete los datos del ticket para generar su factura</p>
+                    </div>
+                    
+                    <form id="invoiceForm">
+                        <div class="form-group">
+                            <label for="folio" class="required-field">Folio del ticket</label>
+                            <input type="text" class="form-control" id="folio" placeholder="Ej: TKT-2023-0001" required>
+                            <small class="info-text">El folio se encuentra en la parte superior de su ticket</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="total" class="required-field">Total de la compra</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" class="form-control" id="total" placeholder="0.00" step="0.01" min="0" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fecha" class="required-field">Fecha de la compra</label>
+                            <input type="date" class="form-control" id="fecha" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="rfc">RFC (Opcional)</label>
+                            <input type="text" class="form-control" id="rfc" placeholder="Si requiere factura, ingrese su RFC">
+                            <small class="info-text">Formato: XAXX010101000 (12-13 caracteres)</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email" placeholder="Para enviar la factura electrónica">
+                        </div>
+                        
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="terms">
+                            <label class="form-check-label" for="terms">Acepto los términos y condiciones</label>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-submit">Validar y Generar Factura</button>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-4 text-center">
+                        <p class="text-muted">¿Necesitas ayuda? <a href="#">Contáctanos</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Validación básica del formulario
+        document.getElementById('invoiceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validar campos requeridos
+            const folio = document.getElementById('folio').value;
+            const total = document.getElementById('total').value;
+            const fecha = document.getElementById('fecha').value;
+            const terms = document.getElementById('terms').checked;
+            
+            if (!folio || !total || !fecha || !terms) {
+                alert('Por favor complete todos los campos requeridos y acepte los términos.');
+                return;
+            }
+            
+            // Simular envío exitoso
+            alert('Su factura está siendo procesada. Recibirá un correo con los detalles.');
+            this.reset();
+        });
+        
+        // Establecer fecha máxima como hoy
+        document.getElementById('fecha').max = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>
