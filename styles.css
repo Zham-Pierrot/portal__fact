@@ -168,68 +168,54 @@ body {
 }
 
 .container {
-    margin-top: 30px;
+    margin-top: 50px;
     margin-bottom: 50px;
 }
 
-/* Estilos para el logo circular */
+/* Estilos mejorados para el logo circular */
 .logo-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .logo {
-    width: 120px;
-    height: 120px;
+    width: 140px; /* Tamaño aumentado */
+    height: 140px;
     border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    object-fit: contain; /* Asegura que todo el logo sea visible */
+    border: 5px solid white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: white; /* Fondo blanco para logos transparentes */
+    padding: 8px; /* Espacio interno */
     transition: all 0.3s ease;
-    background-color: white;
-    padding: 5px;
+    z-index: 10;
+    position: relative;
 }
 
 .logo:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Tarjeta de formulario - Eliminé el pseudo-elemento :before que creaba la franja azul */
 .invoice-card {
     background: white;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     padding: 30px;
     transition: all 0.3s ease;
-    margin-top: -60px; /* Para que el card se superponga al logo */
-    padding-top: 80px; /* Espacio para el logo */
+    margin-top: 0; /* Eliminamos el margen negativo */
     position: relative;
+    border-top: 5px solid var(--secondary-color); /* Pequeño detalle de color en la parte superior */
 }
 
-.invoice-card:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    border-radius: 15px 15px 0 0;
-    z-index: 0;
-}
-
-.invoice-card:hover {
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Resto del CSS permanece igual */
+/* Resto de estilos se mantienen igual */
 .form-header {
     color: var(--primary-color);
     margin-bottom: 30px;
     position: relative;
     padding-bottom: 15px;
-    z-index: 1;
 }
 
 .form-header:after {
@@ -243,3 +229,4 @@ body {
     background: var(--secondary-color);
 }
 
+/* ... (mantén el resto de tu CSS existente) ... */
