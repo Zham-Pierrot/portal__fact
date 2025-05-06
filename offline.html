@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Fact - Sin conexión</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .offline-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .offline-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: #dc3545;
+        }
+        h1 {
+            color: #343a40;
+        }
+        p {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">⚠️</div>
+        <h1>Sin conexión a Internet</h1>
+        <p>No se puede acceder al Portal de Facturación en este momento porque no hay conexión a Internet.</p>
+        <p>Por favor, verifica tu conexión e intenta nuevamente.</p>
+        <button class="btn" onclick="window.location.reload()">Reintentar</button>
+    </div>
+    <script>
+        // Verificar si hay conexión periódicamente
+        setInterval(function() {
+            if (navigator.onLine) {
+                window.location.reload();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

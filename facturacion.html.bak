@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portal de Facturación</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+</head>
+<body>
+    <div class="container">
+       
+        <div id="ticketValidation" class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="invoice-card">
+                    <div class="text-center">
+                        <img src="images/logo.jpg" alt="Logo Empresa" class="logo">
+                        <h2 class="form-header">Validación de Ticket</h2>
+                        <p class="mb-4">Ingrese los datos de su ticket para continuar con la facturación</p>
+                    </div>
+                    
+                    <form id="ticketForm">
+                        <div class="form-group">
+                            <label for="folio" class="required-field">Folio del ticket</label>
+                            <input type="text" class="form-control" id="folio" placeholder="Ej: TKT-2023-0001" required>
+                            <small class="info-text">El folio se encuentra en la parte superior de su ticket</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="total" class="required-field">Total de la compra</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" class="form-control" id="total" placeholder="0.00" step="0.01" min="0" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fecha" class="required-field">Fecha de la compra</label>
+                            <input type="date" class="form-control" id="fecha" required>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <i class="fas fa-check-circle mr-2"></i>Validar Ticket
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+       
+        <div id="billingData" class="row justify-content-center d-none">
+            <div class="col-md-10">
+                <div class="invoice-card">
+                    <div class="text-center">
+                        <h2 class="form-header">Datos de Facturación</h2>
+                        <p class="mb-4">Complete sus datos fiscales para generar la factura</p>
+                        
+                        <div class="ticket-summary mb-4">
+                            <h5>Resumen del Ticket</h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p><strong>Folio:</strong> <span id="displayFolio"></span></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong>Fecha:</strong> <span id="displayFecha"></span></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong>Total:</strong> <span id="displayTotal"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form id="billingForm">
+                        <h5 class="mb-3">Datos Fiscales</h5>
+                        
+                        <div class="form-group">
+                            <label for="rfc" class="required-field">RFC</label>
+                            <input type="text" class="form-control" id="rfc" placeholder="XAXX010101000" required>
+                            <small class="info-text">12-13 caracteres. Personas físicas o morales</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="razonSocial" class="required-field">Razón Social</label>
+                            <input type="text" class="form-control" id="razonSocial" placeholder="Nombre o Razón Social" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="regimenFiscal" class="required-field">Régimen Fiscal</label>
+                            <select class="form-control" id="regimenFiscal" required>
+                                <option value="">Seleccione un régimen</option>
+                                <option value="601">General de Ley Personas Morales</option>
+                                <option value="603">Personas Morales con Fines no Lucrativos</option>
+                                <option value="605">Sueldos y Salarios e Ingresos Asimilados a Salarios</option>
+                                <option value="606">Arrendamiento</option>
+                                <option value="607">Régimen de Enajenación o Adquisición de Bienes</option>
+                                <option value="608">Demás ingresos</option>
+                                <option value="610">Residentes en el Extranjero sin Establecimiento Permanente en México</option>
+                                <option value="611">Ingresos por Dividendos (socios y accionistas)</option>
+                                <option value="612">Personas Físicas con Actividades Empresariales y Profesionales</option>
+                                <option value="614">Ingresos por intereses</option>
+                                <option value="615">Régimen de los ingresos por obtención de premios</option>
+                                <option value="616">Sin obligaciones fiscales</option>
+                                <option value="620">Sociedades Cooperativas de Producción que optan por diferir sus ingresos</option>
+                                <option value="621">Incorporación Fiscal</option>
+                                <option value="622">Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras</option>
+                                <option value="623">Opcional para Grupos de Sociedades</option>
+                                <option value="624">Coordinados</option>
+                                <option value="628">Hidrocarburos</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="codigoPostal" class="required-field">Código Postal</label>
+                            <input type="text" class="form-control" id="codigoPostal" placeholder="00000" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="required-field">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email" placeholder="facturacion@zhamcorp.com" required>
+                            <small class="info-text">Se enviará la factura electrónica a este correo</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="usoCFDI" class="required-field">Uso del CFDI</label>
+                            <select class="form-control" id="usoCFDI" required>
+                                <option value="">Seleccione el uso</option>
+                                <option value="G01">Adquisición de mercancías</option>
+                                <option value="G02">Devoluciones, descuentos o bonificaciones</option>
+                                <option value="G03">Gastos en general</option>
+                                <option value="I01">Construcciones</option>
+                                <option value="I02">Mobiliario y equipo de oficina por inversiones</option>
+                                <option value="I03">Equipo de transporte</option>
+                                <option value="I04">Equipo de cómputo y accesorios</option>
+                                <option value="I05">Dados, troqueles, moldes, matrices y herramental</option>
+                                <option value="I06">Comunicaciones telefónicas</option>
+                                <option value="I07">Comunicaciones satelitales</option>
+                                <option value="I08">Otra maquinaria y equipo</option>
+                                <option value="D01">Honorarios médicos, dentales y gastos hospitalarios</option>
+                                <option value="D02">Gastos médicos por incapacidad o discapacidad</option>
+                                <option value="D03">Gastos funerales</option>
+                                <option value="D04">Donativos</option>
+                                <option value="D05">Intereses reales efectivamente pagados por créditos hipotecarios</option>
+                                <option value="D06">Aportaciones voluntarias al SAR</option>
+                                <option value="D07">Primas por seguros de gastos médicos</option>
+                                <option value="D08">Gastos de transportación escolar obligatoria</option>
+                                <option value="D09">Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones</option>
+                                <option value="D10">Pagos por servicios educativos (colegiaturas)</option>
+                                <option value="P01">Por definir</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" required>
+                            <label class="form-check-label" for="terms">Acepto que los datos proporcionados son correctos y que la factura generada cumple con los requisitos fiscales</label>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="button" id="backToTicket" class="btn btn-outline-secondary mr-3">
+                                <i class="fas fa-arrow-left mr-2"></i>Regresar
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <i class="fas fa-file-invoice-dollar mr-2"></i>Generar Factura
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+       
+        <div id="invoiceResult" class="row justify-content-center d-none">
+            <div class="col-md-10">
+                <div class="invoice-result-card">
+                    <div class="text-center mb-4">
+                        <h2 class="form-header">Factura Generada</h2>
+                        <p class="text-success"><i class="fas fa-check-circle mr-2"></i>Su factura ha sido generada correctamente</p>
+                    </div>
+                    
+                    <div class="invoice-details">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Folio Fiscal:</strong> <span id="resultUuid"></span></p>
+                                <p><strong>Folio del Ticket:</strong> <span id="resultFolio"></span></p>
+                                <p><strong>Fecha de Emisión:</strong> <span id="resultFecha"></span></p>
+                                <p><strong>Razón Social:</strong> <span id="resultRazonSocial"></span></p>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <p><strong>Número de Factura:</strong> <span id="resultNumFactura"></span></p>
+                                <p><strong>RFC:</strong> <span id="resultRfc"></span></p>
+                                <p><strong>Total:</strong> <span id="resultTotal"></span></p>
+                                <p><strong>Estado:</strong> <span class="badge badge-success">Validada por el SAT</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <p><strong>Régimen Fiscal:</strong> <span id="resultRegimen"></span></p>
+                                <p><strong>Uso CFDI:</strong> <span id="resultUsoCFDI"></span></p>
+                                <p><strong>Correo Electrónico:</strong> <span id="resultEmail"></span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="invoice-actions mt-4 text-center">
+                            <button id="downloadPdf" class="btn btn-outline-primary mr-2">
+                                <i class="fas fa-file-pdf mr-2"></i>Descargar PDF
+                                
+                            </button>
+                            <button id="downloadXml" class="btn btn-outline-info mr-2">
+                                <i class="fas fa-file-code mr-2"></i>Descargar XML
+                            </button>
+                            <button id="sendEmail" class="btn btn-outline-secondary">
+                                <i class="fas fa-envelope mr-2"></i>Reenviar por Email
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <p class="text-muted">Esta factura es un comprobante fiscal digital válido ante el SAT.</p>
+                        <button id="newInvoice" class="btn btn-link">
+                            <i class="fas fa-plus-circle mr-2"></i>Generar otra factura
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    
+</body>
+</html>

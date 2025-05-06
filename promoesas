@@ -1,0 +1,29 @@
+Cristhian Ramirez
+1:36 p.m.
+¿Cómo se usa una Promesa?
+Crear una Promesa:
+javascript
+
+const miPromesa = new Promise((resolve, reject) => {
+  let exito = true;
+    //pedir el dato
+  if (exito) {
+    //el servidor contesto bien
+    ///retorna el dato
+    resolve('¡Éxito! 🎉');
+  } else {
+    //retonra un error
+    reject('Ocurrió un error 😥');
+  }
+});
+
+
+
+miPromesa
+  .then(respuesta => {
+    console.log('Todo bien:', respuesta);
+    //recibiendo el dato para la siguiene accion
+    //accion2
+  })
+  .catch(error => {
+    //ma
